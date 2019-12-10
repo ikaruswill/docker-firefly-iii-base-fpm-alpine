@@ -1,0 +1,36 @@
+kind: pipeline
+name: default
+type: docker
+
+platform:
+  os: linux
+  arch: arm
+
+steps:
+- name: publish
+  image: plugins/docker
+  settings:
+    repo: ikaruswill/firefly-iii-base-fpm-alpine
+    auto_tag: true
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+
+trigger:
+  branch:
+  - master
+  event:
+  - tag
+---
+kind: secret
+name: docker_username
+get:
+  path: secret/docker
+  name: username
+---
+kind: secret
+name: docker_password
+get:
+  path: secret/docker
+  name: password
