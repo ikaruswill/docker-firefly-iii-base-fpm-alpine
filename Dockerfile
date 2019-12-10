@@ -1,4 +1,4 @@
-FROM php:7.4-fpm-alpine
+FROM php:7.4.0-fpm-alpine
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
 # Install PHP Extensions (igbinary & memcached)
