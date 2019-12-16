@@ -23,7 +23,9 @@ RUN set -xe && \
     rm -rf /tmp/* && \
     # Install other PHP extensions
     docker-php-ext-install bcmath ldap gd pdo_pgsql pdo_sqlite pdo_mysql intl opcache && \
-    apk del .memcached-deps .phpize-deps .php-ext-deps
+    apk del .memcached-deps .phpize-deps .php-ext-deps && \
+    # Reinstall required packages gd:libpng, intl:icu-libs, ldap:libldap, pdo_pgsql:libpq
+    apk add --no-cache libpq libpng libldap icu-libs
 
 # Install composer and plugins
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
